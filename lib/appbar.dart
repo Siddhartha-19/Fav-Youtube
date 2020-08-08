@@ -6,6 +6,13 @@ title:Image.asset('assets/images/youtube.png',
 fit: BoxFit.cover,
 width:100),
 actions: <Widget>[
+   Padding(
+    padding:EdgeInsets.only(right:20),
+    child: IconButton(
+      icon:Icon(Icons.cast) , 
+      onPressed: null
+      )
+  ),
   Padding(
     padding:EdgeInsets.only(right:20),
     child: IconButton(
@@ -38,21 +45,27 @@ BottomAppBar btmbar=BottomAppBar(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
            IconButton(icon: Icon(Icons.home), onPressed:(){}),
-            Text('Home'),
+            Text('Home',
+            style: TextStyle(
+              fontSize: 8,
+            ),),
           ],
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
            IconButton(icon: Icon(Icons.explore), onPressed:(){}),
-            Text('Explore'),
+            Text('Explore',
+            style: TextStyle(
+              fontSize: 8,))
           ],
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
            IconButton(icon: Icon(Icons.subscriptions), onPressed:(){}),
-            Text('Subscriptions'),
+            Text('Subscriptions',style: TextStyle(
+              fontSize: 8,)),
           ],
         ),
         Column(
@@ -62,14 +75,18 @@ BottomAppBar btmbar=BottomAppBar(
              
            )
            {}),
-            Text('Notifications'),
+            Text('Notifications',
+            style: TextStyle(
+              fontSize: 8,)),
           ],
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
            IconButton(icon: Icon(Icons.video_library), onPressed:(){}),
-            Text('Library'),
+            Text('Library',
+            style: TextStyle(
+              fontSize: 8,)),
           ],
         ),
       ],
