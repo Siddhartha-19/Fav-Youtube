@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_ui/add.dart';
 import 'appbar.dart';
 import 'dart:async';
+import 'package:provider/provider.dart';
+import 'package:youtube_ui/Authenticate/Auth.dart';
+import 'Model-user/user.dart';
+import 'A-service/s-auth.dart';
+import 'Home.dart';
 void main() {
   runApp(MyApp());
 }
@@ -13,139 +19,40 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         accentColor:Colors.white,
       ),
-    home:Splash(),
+    home:Quick(),
     );
   }
 }
-class Splash extends StatefulWidget {
+class Quick extends StatefulWidget {
   @override
-  _SplashState createState() => _SplashState();
+  _QuickState createState() => _QuickState();
 }
 
-class _SplashState extends State<Splash> {
-  startTime() async {
-    var _duration = new Duration(seconds: 3);
-    return new Timer(_duration, navigationPage);
-  }
+class _QuickState extends State<Quick> {
 
-  void navigationPage() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Homepage()));
-  }
 
-  @override
-  void initState() {
-    super.initState();
-    startTime();
-  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Image.asset("assets/images/ylogo.jpg",height: 150,width: 150,),
-      ),
-    );
+    return StreamProvider<User>.value(
+      value:ServiceAuth().user, 
+    child :MaterialApp(
+     home: Checkin()
+    )
+  );
   }
 }
-class Homepage extends StatefulWidget {
+class Checkin extends StatelessWidget {
   @override
-  _HomepageState createState() => _HomepageState();
-}
-
-class _HomepageState extends State<Homepage> {
-  List<String> vpic=
-  [
-    "assets/images/avengersinfinity.jpg",
-    "assets/images/Ironman.jpg",
-    "assets/images/Civilwar.jpg"
-  ];
-  List<String>vtitle=[
-    "Avengers Infinitywar Trailer",
-    "IronMan 3 Trailer",
-    "Civilwar Trailer",
-  ];
-  List<String>vtime=[
-    "4:50",
-    "3:30",
-    "2:20",
-  ];
-  Widget videos(String image, String title,String time) {
-    return Column(
-      
-      children: <Widget>[
-        Stack(
-          
-          children: <Widget>[
-            Image.asset(image,
-            fit: BoxFit.fill),
-            Positioned.fill(
-              bottom: 10.0,
-              right: 10.0,
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Container(
-                  color: Colors.black,
-                  padding: EdgeInsets.all(4.0),
-                  child: Text(
-                    "$time",
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 5.0,
-        ),
-        Container(
-          color: Colors.black,
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundImage: AssetImage('assets/images/Marvel.png'),
-            ),
-            title: Text(
-              "$title",
-              textAlign: TextAlign.start,
-            ),
-            subtitle: Text(
-              "Marvel . 630M Views . 1 year ago",
-            ),
-            trailing: Icon(Icons.more_vert, color: Colors.white),
-          ),
-        ),
-        SizedBox(
-          height: 10.0,
-          child: Container(
-            color: Colors.black,
-          ),
-        )
-      ],
-    );
-  }
-
-
-  @override
-
-   
-
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar:tpbar,
-      bottomNavigationBar: btmbar,
-      backgroundColor: Colors.black,
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            videos(vpic[0],vtitle[0],vtime[0]),
-                  videos(vpic[1],vtitle[1],vtime[1]),
-                videos(vpic[2],vtitle[2],vtime[2]),
-                videos(vpic[0],vtitle[0],vtime[0]),
-                  videos(vpic[1],vtitle[1],vtime[1]),
-
-            
-          ],
-        ),
-      )
-    );
+    final user=Provider.of<User>(context);
+    
+    if(user==null)
+    {
+    return Authenticate();
+      }
+    else{
+      return Homepage();
+    }
   }
 }

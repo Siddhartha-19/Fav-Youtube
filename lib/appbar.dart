@@ -1,11 +1,8 @@
-import 'package:flutter/material.dart';
-  
-AppBar tpbar =AppBar(
-backgroundColor: Colors.black,
-title:Image.asset('assets/images/youtube.png',
-fit: BoxFit.cover,
-width:100),
-actions: <Widget>[
+import 'package:flutter/material.dart'; 
+import 'A-service/s-auth.dart';
+//final ServiceAuth _auth = ServiceAuth();
+/*AppBar tpbar =
+/*actions: <Widget>[
    Padding(
     padding:EdgeInsets.only(right:20),
     child: IconButton(
@@ -28,7 +25,7 @@ actions: <Widget>[
     padding:EdgeInsets.only(right:20),
     child: IconButton(icon: Icon(Icons.account_circle), onPressed: null), 
   )
-],
+],*/
 );
 
 BottomAppBar btmbar=BottomAppBar(
@@ -94,4 +91,4 @@ BottomAppBar btmbar=BottomAppBar(
   ),
   
 
-);
+);*/
